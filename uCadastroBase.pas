@@ -138,8 +138,11 @@ end;
 
 procedure TfmCadastroBase.Edit;
 begin
-  GotoPageEdit;
-  qrDados.Edit;
+  if not(qrDados.IsEmpty) then
+  begin
+    GotoPageEdit;
+    qrDados.Edit;
+  end;
 end;
 
 function TfmCadastroBase.ValidarDados: boolean;

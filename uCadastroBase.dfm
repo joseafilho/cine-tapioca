@@ -122,8 +122,6 @@ object fmCadastroBase: TfmCadastroBase
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitLeft = 97
-        ExplicitWidth = 619
       end
       object pnEditButtons: TPanel
         Left = 0

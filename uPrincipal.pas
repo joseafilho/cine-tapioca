@@ -21,8 +21,11 @@ type
     tbPrincipal: TToolBar;
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
+    Sesses1: TMenuItem;
     procedure Salas1Click(Sender: TObject);
     procedure Produtos1Click(Sender: TObject);
+    procedure Filmes1Click(Sender: TObject);
+    procedure Sesses1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,7 +40,15 @@ implementation
 {$R *.dfm}
 
 uses
-  uCadastroSalas, uCadastroProdutos;
+  uCadastroSalas, uCadastroProdutos, uCadastroFilmes, uCadastroSessoes;
+
+procedure TfmPrincipal.Filmes1Click(Sender: TObject);
+begin
+  if fmCadastroFilmes = nil then
+    fmCadastroFilmes := TfmCadastroFilmes.Create(Self);
+
+  fmCadastroFilmes.Show;
+end;
 
 procedure TfmPrincipal.Produtos1Click(Sender: TObject);
 begin
@@ -53,6 +64,14 @@ begin
     fmCadastroSalas := TfmCadastroSalas.Create(Self);
 
   fmCadastroSalas.Show;
+end;
+
+procedure TfmPrincipal.Sesses1Click(Sender: TObject);
+begin
+  if fmCadastroSessoes = nil then
+    fmCadastroSessoes := TfmCadastroSessoes.Create(Self);
+
+  fmCadastroSessoes.Show;
 end;
 
 end.

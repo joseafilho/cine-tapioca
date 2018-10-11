@@ -56,6 +56,11 @@ object fmPrincipal: TfmPrincipal
       end
       object Filmes1: TMenuItem
         Caption = 'Filmes'
+        OnClick = Filmes1Click
+      end
+      object Sesses1: TMenuItem
+        Caption = 'Sess'#245'es'
+        OnClick = Sesses1Click
       end
       object Produtos1: TMenuItem
         Caption = 'Produtos'
