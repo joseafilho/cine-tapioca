@@ -75,6 +75,10 @@ object fmPrincipal: TfmPrincipal
     end
     object Movimentos1: TMenuItem
       Caption = 'Movimentos'
+      object Vendas1: TMenuItem
+        Caption = 'Vendas'
+        OnClick = Vendas1Click
+      end
     end
     object Relatrios1: TMenuItem
       Caption = 'Relat'#243'rios'

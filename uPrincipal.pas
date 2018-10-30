@@ -22,10 +22,12 @@ type
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
     Sesses1: TMenuItem;
+    Vendas1: TMenuItem;
     procedure Salas1Click(Sender: TObject);
     procedure Produtos1Click(Sender: TObject);
     procedure Filmes1Click(Sender: TObject);
     procedure Sesses1Click(Sender: TObject);
+    procedure Vendas1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,7 +42,8 @@ implementation
 {$R *.dfm}
 
 uses
-  uCadastroSalas, uCadastroProdutos, uCadastroFilmes, uCadastroSessoes;
+  uCadastroSalas, uCadastroProdutos, uCadastroFilmes, uCadastroSessoes,
+  uMovimentoVendas;
 
 procedure TfmPrincipal.Filmes1Click(Sender: TObject);
 begin
@@ -72,6 +75,16 @@ begin
     fmCadastroSessoes := TfmCadastroSessoes.Create(Self);
 
   fmCadastroSessoes.Show;
+end;
+
+procedure TfmPrincipal.Vendas1Click(Sender: TObject);
+begin
+  fmMovimentoVendas := TfmMovimentoVendas.Create(Self);
+  try
+    fmMovimentoVendas.ShowModal;
+  finally
+    fmMovimentoVendas.Free;
+  end;
 end;
 
 end.
