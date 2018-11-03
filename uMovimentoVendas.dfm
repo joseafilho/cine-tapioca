@@ -11,9 +11,19 @@ object fmMovimentoVendas: TfmMovimentoVendas
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 19
+  object Label6: TLabel
+    Left = 359
+    Top = 120
+    Width = 34
+    Height = 19
+    Caption = 'Hora'
+  end
   object pnTop: TPanel
     Left = 0
     Top = 0
@@ -44,6 +54,7 @@ object fmMovimentoVendas: TfmMovimentoVendas
       Height = 41
       Caption = 'Finalizar Venda'
       TabOrder = 2
+      OnClick = btFinalizarClick
     end
   end
   object pnDados: TPanel
@@ -122,7 +133,7 @@ object fmMovimentoVendas: TfmMovimentoVendas
     object edSala: TDBEdit
       Left = 478
       Top = 106
-      Width = 121
+      Width = 235
       Height = 27
       DataField = 'NOME_SALA'
       DataSource = dsSessoes
@@ -136,14 +147,12 @@ object fmMovimentoVendas: TfmMovimentoVendas
     Height = 419
     Align = alClient
     BorderStyle = bsNone
-    ButtonHeight = 52
-    ButtonWidth = 52
+    ButtonHeight = 70
+    ButtonWidth = 70
     Images = ilCadeiras
     Items = <>
     TabOrder = 2
     OnButtonClicked = bgCadeirasButtonClicked
-    ExplicitTop = 222
-    ExplicitHeight = 211
   end
   object qrSessoes: TFDQuery
     AfterScroll = qrSessoesAfterScroll
@@ -256,7 +265,7 @@ object fmMovimentoVendas: TfmMovimentoVendas
     Left = 944
     Top = 16
     Bitmap = {
-      494C010102000800380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000800400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -394,5 +403,10 @@ object fmMovimentoVendas: TfmMovimentoVendas
       E007E00700000000E007E00700000000E007E00700000000E007E00700000000
       F01FF01F00000000FFFFFFFF0000000000000000000000000000000000000000
       000000000000}
+  end
+  object qrVendas: TFDQuery
+    Connection = dmConn.fcConn
+    Left = 584
+    Top = 24
   end
 end
