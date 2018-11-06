@@ -10,6 +10,7 @@ object fmMovimentoVendas: TfmMovimentoVendas
   Font.Height = -16
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   OnCreate = FormCreate
@@ -110,6 +111,8 @@ object fmMovimentoVendas: TfmMovimentoVendas
       ListField = 'NOME'
       ListSource = dsSessoes
       TabOrder = 0
+      OnCloseUp = lkSessoesCloseUp
+      OnKeyDown = lkSessoesKeyDown
     end
     object edHora: TDBEdit
       Left = 351
@@ -155,7 +158,6 @@ object fmMovimentoVendas: TfmMovimentoVendas
     OnButtonClicked = bgCadeirasButtonClicked
   end
   object qrSessoes: TFDQuery
-    AfterScroll = qrSessoesAfterScroll
     Connection = dmConn.fcConn
     SQL.Strings = (
       'SELECT SS.*, '
@@ -265,7 +267,7 @@ object fmMovimentoVendas: TfmMovimentoVendas
     Left = 944
     Top = 16
     Bitmap = {
-      494C010102000800400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000800440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -407,6 +409,18 @@ object fmMovimentoVendas: TfmMovimentoVendas
   object qrVendas: TFDQuery
     Connection = dmConn.fcConn
     Left = 584
+    Top = 24
+  end
+  object qrCadeirasVendidas: TFDQuery
+    Indexes = <
+      item
+        Active = True
+        Name = 'ixCADEIRA'
+        Fields = 'CADEIRA'
+        Options = [soNoCase]
+      end>
+    Connection = dmConn.fcConn
+    Left = 664
     Top = 24
   end
 end
