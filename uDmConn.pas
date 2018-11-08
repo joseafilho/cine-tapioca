@@ -25,7 +25,6 @@ var
 implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
-
 {$R *.dfm}
 
 procedure TdmConn.DataModuleCreate(Sender: TObject);

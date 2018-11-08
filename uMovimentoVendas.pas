@@ -3,7 +3,8 @@ unit uMovimentoVendas;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
@@ -21,7 +22,6 @@ type
     qrSessoesHORA: TTimeField;
     qrSessoesFILME: TIntegerField;
     qrSessoesSALA: TIntegerField;
-    btIniciar: TButton;
     btCancelar: TButton;
     btFinalizar: TButton;
     pnDados: TPanel;
@@ -60,6 +60,7 @@ type
   private
     FCadeirasSelecionadas: TStringList;
     procedure RenderizarCadeiras;
+    procedure ReiniciarVenda;
     { Private declarations }
   public
     { Public declarations }
@@ -106,7 +107,8 @@ begin
     else
     begin
       bgCadeiras.Items[Index].ImageIndex := CADEIRA_DESOCUPADA;
-      FCadeirasSelecionadas.Delete(FCadeirasSelecionadas.IndexOf(IntToStr(Index)));
+      FCadeirasSelecionadas.Delete
+        (FCadeirasSelecionadas.IndexOf(IntToStr(Index)));
     end;
   end;
 end;
@@ -138,10 +140,11 @@ end;
 
 procedure TfmMovimentoVendas.RenderizarCadeiras;
 var
-  I: integer;
+  I: Integer;
   Cadeira: TGrpButtonItem;
-  CadeiraVendida: integer;
+  CadeiraVendida: Integer;
 begin
+  FCadeirasSelecionadas.Clear;
   bgCadeiras.Items.Clear;
 
   // Adicionando as caderias
@@ -154,14 +157,13 @@ begin
 
   // Validando as cadeiras ocupadas
   qrCadeirasVendidas.Close;
-  qrCadeirasVendidas.SQL.Text := 'SELECT VI.CADEIRA '+
-                                 'FROM VENDAS_ITENS VI '+
-                                 'INNER JOIN VENDAS VE ON VE.ID = VI.VENDA_ID '+
-                                 'INNER JOIN SESSOES SE ON SE.ID = VE.SESSAO '+
-                                 'WHERE SE.ID = :SESSAO '+
-                                 'AND SE.FILME = :FILME ';
+  qrCadeirasVendidas.SQL.Text := 'SELECT VI.CADEIRA ' + 'FROM VENDAS_ITENS VI '
+    + 'INNER JOIN VENDAS VE ON VE.ID = VI.VENDA_ID ' +
+    'INNER JOIN SESSOES SE ON SE.ID = VE.SESSAO ' + 'WHERE SE.ID = :SESSAO ' +
+    'AND SE.FILME = :FILME ' + 'AND VE.DATA = :DATA';
   qrCadeirasVendidas.ParamByName('SESSAO').AsInteger := qrSessoesID.AsInteger;
   qrCadeirasVendidas.ParamByName('FILME').AsInteger := qrFilmesID.AsInteger;
+  qrCadeirasVendidas.ParamByName('DATA').AsDate := Now;
   qrCadeirasVendidas.Open;
 
   while not(qrCadeirasVendidas.Eof) do
@@ -175,31 +177,51 @@ end;
 procedure TfmMovimentoVendas.btFinalizarClick(Sender: TObject);
 var
   I: Integer;
-  VendaId: integer;
+  VendaId: Integer;
 begin
-  // Esse código a seguir inseri uma venda e retorna o ID da venda
-  qrVendas.SQL.Text := 'INSERT INTO VENDAS(DATA, SESSAO, TOTAL) '+
-                       'VALUES(:DATA, :SESSAO, :TOTAL) '+
-                       'RETURNING ID {INTO :ID};';
-
-  qrVendas.ParamByName('DATA').AsDate := Now;
-  qrVendas.ParamByName('SESSAO').AsInteger := qrSessoesID.AsInteger;
-  qrVendas.ParamByName('TOTAL').AsCurrency := 0;
-  qrVendas.ExecSQL;
-  VendaId := qrVendas.ParamByName('ID').AsInteger;
-
-  // Esse código a seguir inserir os itens da venda de riba
-  qrVendas.SQL.Text := 'INSERT INTO VENDAS_ITENS(VENDA_ID, CADEIRA, QUANTIDADE, VALOR) '+
-                       'VALUES(:VENDA_ID, :CADEIRA, :QUANTIDADE, :VALOR)';
-
-  for I := 0 to FCadeirasSelecionadas.Count - 1 do
+  if FCadeirasSelecionadas.Count > 0 then
   begin
-    qrVendas.ParamByName('VENDA_ID').AsInteger := VendaId;
-    qrVendas.ParamByName('CADEIRA').AsInteger := StrToInt(FCadeirasSelecionadas[I]);
-    qrVendas.ParamByName('QUANTIDADE').AsInteger := 1;
-    qrVendas.ParamByName('VALOR').AsCurrency := 15;
+    // Esse código a seguir inseri uma venda e retorna o ID da venda
+    qrVendas.SQL.Text := 'INSERT INTO VENDAS(DATA, SESSAO, TOTAL) ' +
+      'VALUES(:DATA, :SESSAO, :TOTAL) ' + 'RETURNING ID {INTO :ID};';
+
+    qrVendas.ParamByName('DATA').AsDate := Now;
+    qrVendas.ParamByName('SESSAO').AsInteger := qrSessoesID.AsInteger;
+    qrVendas.ParamByName('TOTAL').AsCurrency := 0;
     qrVendas.ExecSQL;
+    VendaId := qrVendas.ParamByName('ID').AsInteger;
+
+    // Esse código a seguir inserir os itens da venda de riba
+    qrVendas.SQL.Text :=
+      'INSERT INTO VENDAS_ITENS(VENDA_ID, CADEIRA, QUANTIDADE, VALOR) ' +
+      'VALUES(:VENDA_ID, :CADEIRA, :QUANTIDADE, :VALOR)';
+
+    for I := 0 to FCadeirasSelecionadas.Count - 1 do
+    begin
+      qrVendas.ParamByName('VENDA_ID').AsInteger := VendaId;
+      qrVendas.ParamByName('CADEIRA').AsInteger :=
+        StrToInt(FCadeirasSelecionadas[I]);
+      qrVendas.ParamByName('QUANTIDADE').AsInteger := 1;
+      qrVendas.ParamByName('VALOR').AsCurrency := 15;
+      qrVendas.ExecSQL;
+    end;
+
+    ShowInformation('Venda finalizada com sucesso.');
+    ReiniciarVenda;
+  end
+  else
+  begin
+    ShowInformation('Nenhum item selecionado para venda.');
+    lkFilmes.SetFocus;
   end;
+end;
+
+procedure TfmMovimentoVendas.ReiniciarVenda;
+begin
+  bgCadeiras.Items.Clear;
+  lkSessoes.KeyValue := null;
+  lkFilmes.KeyValue := null;
+  lkFilmes.SetFocus;
 end;
 
 end.

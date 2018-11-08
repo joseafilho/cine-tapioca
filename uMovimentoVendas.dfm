@@ -29,44 +29,37 @@ object fmMovimentoVendas: TfmMovimentoVendas
     Left = 0
     Top = 0
     Width = 1041
-    Height = 78
+    Height = 66
     Align = alTop
-    TabOrder = 0
-    object btIniciar: TButton
-      Left = 8
-      Top = 16
-      Width = 129
-      Height = 41
-      Caption = 'Iniciar Venda'
-      TabOrder = 0
-    end
+    TabOrder = 2
     object btCancelar: TButton
-      Left = 296
-      Top = 16
+      Left = 168
+      Top = 8
       Width = 129
       Height = 41
       Caption = 'Cancelar Venda'
-      TabOrder = 1
+      TabOrder = 0
     end
     object btFinalizar: TButton
-      Left = 143
-      Top = 16
+      Left = 15
+      Top = 8
       Width = 129
       Height = 41
       Caption = 'Finalizar Venda'
-      TabOrder = 2
+      TabOrder = 1
       OnClick = btFinalizarClick
     end
   end
   object pnDados: TPanel
     Left = 0
-    Top = 78
+    Top = 66
     Width = 1041
     Height = 185
     Align = alTop
     BevelOuter = bvNone
     ParentBackground = False
-    TabOrder = 1
+    TabOrder = 0
+    ExplicitTop = 78
     object Label1: TLabel
       Left = 8
       Top = 81
@@ -110,7 +103,7 @@ object fmMovimentoVendas: TfmMovimentoVendas
       KeyField = 'ID'
       ListField = 'NOME'
       ListSource = dsSessoes
-      TabOrder = 0
+      TabOrder = 1
       OnCloseUp = lkSessoesCloseUp
       OnKeyDown = lkSessoesKeyDown
     end
@@ -121,7 +114,7 @@ object fmMovimentoVendas: TfmMovimentoVendas
       Height = 27
       DataField = 'HORA'
       DataSource = dsSessoes
-      TabOrder = 1
+      TabOrder = 2
     end
     object lkFilmes: TDBLookupComboBox
       Left = 8
@@ -131,7 +124,7 @@ object fmMovimentoVendas: TfmMovimentoVendas
       KeyField = 'ID'
       ListField = 'NOME'
       ListSource = dsFilmes
-      TabOrder = 2
+      TabOrder = 0
     end
     object edSala: TDBEdit
       Left = 478
@@ -145,17 +138,19 @@ object fmMovimentoVendas: TfmMovimentoVendas
   end
   object bgCadeiras: TButtonGroup
     Left = 0
-    Top = 263
+    Top = 251
     Width = 1041
-    Height = 419
+    Height = 431
     Align = alClient
     BorderStyle = bsNone
     ButtonHeight = 70
     ButtonWidth = 70
     Images = ilCadeiras
     Items = <>
-    TabOrder = 2
+    TabOrder = 1
     OnButtonClicked = bgCadeirasButtonClicked
+    ExplicitTop = 263
+    ExplicitHeight = 419
   end
   object qrSessoes: TFDQuery
     Connection = dmConn.fcConn
@@ -267,7 +262,7 @@ object fmMovimentoVendas: TfmMovimentoVendas
     Left = 944
     Top = 16
     Bitmap = {
-      494C010102000800440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000800480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

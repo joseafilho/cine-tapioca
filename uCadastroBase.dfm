@@ -114,6 +114,10 @@ object fmCadastroBase: TfmCadastroBase
     object tsEdit: TTabSheet
       Caption = 'tsEdit'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pnEdits: TPanel
         Left = 145
         Top = 0

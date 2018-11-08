@@ -3,6 +3,12 @@ inherited fmCadastroFilmes: TfmCadastroFilmes
   PixelsPerInch = 96
   TextHeight = 19
   inherited pcPrincipal: TPageControl
+    inherited tsDados: TTabSheet
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
+    end
     inherited tsEdit: TTabSheet
       inherited pnEdits: TPanel
         object Id: TLabel

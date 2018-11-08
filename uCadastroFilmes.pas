@@ -3,7 +3,8 @@ unit uCadastroFilmes;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadastroBase, Data.DB,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
@@ -82,7 +83,8 @@ procedure TfmCadastroFilmes.qrDadosCalcFields(DataSet: TDataSet);
 begin
   inherited;
 
-  qrDadosCLASSIFICACAO_CF.AsString := cbClassificacao.Items[qrDadosCLASSIFICADO.AsInteger];
+  qrDadosCLASSIFICACAO_CF.AsString := cbClassificacao.Items
+    [qrDadosCLASSIFICADO.AsInteger];
   qrDadosTIPO_CF.AsString := rgTipo.Items[qrDadosTIPO.AsInteger];
 
   if qrDadosDUBLADO.AsInteger = 0 then

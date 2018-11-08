@@ -2,14 +2,14 @@ program CineTapioca;
 
 uses
   Vcl.Forms,
-  uPrincipal in 'uPrincipal.pas' {fmPrincipal},
-  uCadastroBase in 'uCadastroBase.pas' {fmCadastroBase},
-  uDmConn in 'uDmConn.pas' {dmConn: TDataModule},
-  uCadastroSalas in 'uCadastroSalas.pas' {fmCadastroSalas},
+  uPrincipal in 'uPrincipal.pas' {fmPrincipal} ,
+  uCadastroBase in 'uCadastroBase.pas' {fmCadastroBase} ,
+  uDmConn in 'uDmConn.pas' {dmConn: TDataModule} ,
+  uCadastroSalas in 'uCadastroSalas.pas' {fmCadastroSalas} ,
   uSystemUtils in 'uSystemUtils.pas',
-  uCadastroProdutos in 'uCadastroProdutos.pas' {fmCadastroProdutos},
-  uCadastroFilmes in 'uCadastroFilmes.pas' {fmCadastroFilmes},
-  uCadastroSessoes in 'uCadastroSessoes.pas' {fmCadastroSessoes},
+  uCadastroProdutos in 'uCadastroProdutos.pas' {fmCadastroProdutos} ,
+  uCadastroFilmes in 'uCadastroFilmes.pas' {fmCadastroFilmes} ,
+  uCadastroSessoes in 'uCadastroSessoes.pas' {fmCadastroSessoes} ,
   uMovimentoVendas in 'uMovimentoVendas.pas' {fmMovimentoVendas};
 
 {$R *.res}
@@ -21,4 +21,5 @@ begin
   Application.CreateForm(TdmConn, dmConn);
   Application.CreateForm(TfmPrincipal, fmPrincipal);
   Application.Run;
+
 end.

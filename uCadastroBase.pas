@@ -3,6 +3,7 @@ unit uCadastroBase;
 interface
 
 {$REGION 'uses'}
+
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
@@ -61,8 +62,8 @@ var
 implementation
 
 {$R *.dfm}
-
 {$REGION 'uses'}
+
 uses uDmConn, uSystemUtils;
 {$ENDREGION}
 
@@ -71,22 +72,28 @@ begin
   Action := caFree;
 end;
 
-procedure TfmCadastroBase.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TfmCadastroBase.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
   if not(Shift = []) then
     Exit;
 
   if dsDados.State = dsBrowse then
     case Key of
-      VK_F2: Insert;
-      VK_F3: Edit;
-      VK_F4: Delete;
+      VK_F2:
+        Insert;
+      VK_F3:
+        Edit;
+      VK_F4:
+        Delete;
     end;
 
   if dsDados.State in [dsInsert, dsEdit] then
     case Key of
-      VK_F9: Save;
-      VK_ESCAPE: Cancel;
+      VK_F9:
+        Save;
+      VK_ESCAPE:
+        Cancel;
     end;
 end;
 
@@ -112,7 +119,7 @@ end;
 
 procedure TfmCadastroBase.Save;
 begin
-  btSalvar.SetFocus; {TODO -oUECE -cBug : Forçar atribuição do valor ao Field}
+  btSalvar.SetFocus; { TODO -oUECE -cBug : Forçar atribuição do valor ao Field }
 
   if ValidarDados then
   begin

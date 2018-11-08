@@ -4,14 +4,10 @@ inherited fmCadastroProdutos: TfmCadastroProdutos
   TextHeight = 19
   inherited pcPrincipal: TPageControl
     inherited tsDados: TTabSheet
-      inherited pnDadosNavigator: TPanel
-        inherited nvDados: TDBNavigator
-          ExplicitLeft = 539
-        end
-      end
-      inherited pnDadosButtons: TPanel
-        ExplicitHeight = 352
-      end
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     inherited tsEdit: TTabSheet
       inherited pnEdits: TPanel
