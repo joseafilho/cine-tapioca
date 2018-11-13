@@ -24,11 +24,13 @@ type
     ToolButton2: TToolButton;
     Sesses1: TMenuItem;
     Vendas1: TMenuItem;
+    Vendas2: TMenuItem;
     procedure Salas1Click(Sender: TObject);
     procedure Produtos1Click(Sender: TObject);
     procedure Filmes1Click(Sender: TObject);
     procedure Sesses1Click(Sender: TObject);
     procedure Vendas1Click(Sender: TObject);
+    procedure Vendas2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,7 +46,7 @@ implementation
 
 uses
   uCadastroSalas, uCadastroProdutos, uCadastroFilmes, uCadastroSessoes,
-  uMovimentoVendas;
+  uMovimentoVendas, uRelatorioVendasParametros;
 
 procedure TfmPrincipal.Filmes1Click(Sender: TObject);
 begin
@@ -85,6 +87,16 @@ begin
     fmMovimentoVendas.ShowModal;
   finally
     fmMovimentoVendas.Free;
+  end;
+end;
+
+procedure TfmPrincipal.Vendas2Click(Sender: TObject);
+begin
+  fmRelatorioVendasParametros := TfmRelatorioVendasParametros.Create(Self);
+  try
+    fmRelatorioVendasParametros.ShowModal;
+  finally
+    fmRelatorioVendasParametros.Free;
   end;
 end;
 

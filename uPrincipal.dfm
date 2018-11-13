@@ -82,6 +82,10 @@ object fmPrincipal: TfmPrincipal
     end
     object Relatrios1: TMenuItem
       Caption = 'Relat'#243'rios'
+      object Vendas2: TMenuItem
+        Caption = 'Vendas'
+        OnClick = Vendas2Click
+      end
     end
   end
 end

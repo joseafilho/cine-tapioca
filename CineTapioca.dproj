@@ -135,6 +135,14 @@
             <Form>fmMovimentoVendas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uRelatorioVendas.pas">
+            <Form>fmRelatorioVendas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uRelatorioVendasParametros.pas">
+            <Form>fmRelatorioVendasParametros</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
