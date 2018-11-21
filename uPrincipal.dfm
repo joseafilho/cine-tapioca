@@ -69,6 +69,10 @@ object fmPrincipal: TfmPrincipal
       object N1: TMenuItem
         Caption = '-'
       end
+      object Usurios1: TMenuItem
+        Caption = 'Usu'#225'rios'
+        OnClick = Usurios1Click
+      end
       object Sair1: TMenuItem
         Caption = 'Sair'
       end

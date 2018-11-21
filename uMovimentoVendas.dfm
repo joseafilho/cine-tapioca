@@ -59,7 +59,6 @@ object fmMovimentoVendas: TfmMovimentoVendas
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = 78
     object Label1: TLabel
       Left = 8
       Top = 81
@@ -149,8 +148,6 @@ object fmMovimentoVendas: TfmMovimentoVendas
     Items = <>
     TabOrder = 1
     OnButtonClicked = bgCadeirasButtonClicked
-    ExplicitTop = 263
-    ExplicitHeight = 419
   end
   object qrSessoes: TFDQuery
     Connection = dmConn.fcConn
@@ -262,7 +259,7 @@ object fmMovimentoVendas: TfmMovimentoVendas
     Left = 944
     Top = 16
     Bitmap = {
-      494C010102000800480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020008004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

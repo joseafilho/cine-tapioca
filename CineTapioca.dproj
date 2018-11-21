@@ -103,45 +103,41 @@
         </DelphiCompile>
         <DCCReference Include="uPrincipal.pas">
             <Form>fmPrincipal</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uCadastroBase.pas">
             <Form>fmCadastroBase</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uDmConn.pas">
             <Form>dmConn</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="uCadastroSalas.pas">
             <Form>fmCadastroSalas</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uSystemUtils.pas"/>
         <DCCReference Include="uCadastroProdutos.pas">
             <Form>fmCadastroProdutos</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uCadastroFilmes.pas">
             <Form>fmCadastroFilmes</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uCadastroSessoes.pas">
             <Form>fmCadastroSessoes</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uMovimentoVendas.pas">
             <Form>fmMovimentoVendas</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uRelatorioVendas.pas">
             <Form>fmRelatorioVendas</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uRelatorioVendasParametros.pas">
             <Form>fmRelatorioVendasParametros</Form>
-            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadastroUsuarios.pas">
+            <Form>fmCadastroUsuarios</Form>
+        </DCCReference>
+        <DCCReference Include="uDialogoLogin.pas">
+            <Form>fmDialogoLogin</Form>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

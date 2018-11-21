@@ -178,41 +178,57 @@ procedure TfmMovimentoVendas.btFinalizarClick(Sender: TObject);
 var
   I: Integer;
   VendaId: Integer;
+  TransOk: boolean;
 begin
-  if FCadeirasSelecionadas.Count > 0 then
-  begin
-    // Esse código a seguir inseri uma venda e retorna o ID da venda
-    qrVendas.SQL.Text := 'INSERT INTO VENDAS(DATA, SESSAO, TOTAL) ' +
-      'VALUES(:DATA, :SESSAO, :TOTAL) ' + 'RETURNING ID {INTO :ID};';
+  TransOk := false;
+  dmConn.fcConn.StartTransaction;
+  try
+    try
+      if FCadeirasSelecionadas.Count > 0 then
+      begin
+        // Esse código a seguir inseri uma venda e retorna o ID da venda
+        qrVendas.SQL.Text := 'INSERT INTO VENDAS(DATA, SESSAO, TOTAL) ' +
+          'VALUES(:DATA, :SESSAO, :TOTAL) ' + 'RETURNING ID {INTO :ID};';
 
-    qrVendas.ParamByName('DATA').AsDate := Now;
-    qrVendas.ParamByName('SESSAO').AsInteger := qrSessoesID.AsInteger;
-    qrVendas.ParamByName('TOTAL').AsCurrency := 0;
-    qrVendas.ExecSQL;
-    VendaId := qrVendas.ParamByName('ID').AsInteger;
+        qrVendas.ParamByName('DATA').AsDate := Now;
+        qrVendas.ParamByName('SESSAO').AsInteger := qrSessoesID.AsInteger;
+        qrVendas.ParamByName('TOTAL').AsCurrency := 0;
+        qrVendas.ExecSQL;
+        VendaId := qrVendas.ParamByName('ID').AsInteger;
 
-    // Esse código a seguir inserir os itens da venda de riba
-    qrVendas.SQL.Text :=
-      'INSERT INTO VENDAS_ITENS(VENDA_ID, CADEIRA, QUANTIDADE, VALOR) ' +
-      'VALUES(:VENDA_ID, :CADEIRA, :QUANTIDADE, :VALOR)';
+        // Esse código a seguir inserir os itens da venda de riba
+        qrVendas.SQL.Text :=
+          'INSERT INTO VENDAS_ITENS(VENDA_ID, CADEIRA, QUANTIDADE, VALOR) ' +
+          'VALUES(:VENDA_ID, :CADEIRA, :QUANTIDADE, :VALOR)';
 
-    for I := 0 to FCadeirasSelecionadas.Count - 1 do
-    begin
-      qrVendas.ParamByName('VENDA_ID').AsInteger := VendaId;
-      qrVendas.ParamByName('CADEIRA').AsInteger :=
-        StrToInt(FCadeirasSelecionadas[I]);
-      qrVendas.ParamByName('QUANTIDADE').AsInteger := 1;
-      qrVendas.ParamByName('VALOR').AsCurrency := 15;
-      qrVendas.ExecSQL;
+        for I := 0 to FCadeirasSelecionadas.Count - 1 do
+        begin
+          qrVendas.ParamByName('VENDA_ID').AsInteger := VendaId;
+          qrVendas.ParamByName('CADEIRA').AsInteger :=
+            StrToInt(FCadeirasSelecionadas[I]);
+          qrVendas.ParamByName('QUANTIDADE').AsInteger := 1;
+          qrVendas.ParamByName('VALOR').AsCurrency := 15;
+          qrVendas.ExecSQL;
+        end;
+
+        ShowInformation('Venda finalizada com sucesso.');
+        TransOk := true;
+        ReiniciarVenda;
+      end
+      else
+      begin
+        ShowInformation('Nenhum item selecionado para venda.');
+        lkFilmes.SetFocus;
+      end;
+    except
+      on E: exception do
+        ShowInformation('Evento inesperado: ' + E.Message);
     end;
-
-    ShowInformation('Venda finalizada com sucesso.');
-    ReiniciarVenda;
-  end
-  else
-  begin
-    ShowInformation('Nenhum item selecionado para venda.');
-    lkFilmes.SetFocus;
+  finally
+    if TransOk then
+      dmConn.fcConn.Commit
+    else
+      dmConn.fcConn.Rollback;
   end;
 end;
 
