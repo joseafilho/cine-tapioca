@@ -26,6 +26,7 @@ type
     Vendas1: TMenuItem;
     Vendas2: TMenuItem;
     Usurios1: TMenuItem;
+    Configuraes1: TMenuItem;
     procedure Salas1Click(Sender: TObject);
     procedure Produtos1Click(Sender: TObject);
     procedure Filmes1Click(Sender: TObject);
@@ -33,6 +34,7 @@ type
     procedure Vendas1Click(Sender: TObject);
     procedure Vendas2Click(Sender: TObject);
     procedure Usurios1Click(Sender: TObject);
+    procedure Configuraes1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,7 +50,19 @@ implementation
 
 uses
   uCadastroSalas, uCadastroProdutos, uCadastroFilmes, uCadastroSessoes,
-  uMovimentoVendas, uRelatorioVendasParametros, uCadastroUsuarios;
+  uMovimentoVendas, uRelatorioVendasParametros, uCadastroUsuarios,
+  uSistemaConfiguracoes;
+
+procedure TfmPrincipal.Configuraes1Click(Sender: TObject);
+begin
+  if fmSistemaConfiguracoes = nil then
+  begin
+    fmSistemaConfiguracoes := TfmSistemaConfiguracoes.Create(Self);
+    fmSistemaConfiguracoes.FormStyle := fsMDIChild;
+  end;
+
+  fmSistemaConfiguracoes.Show;
+end;
 
 procedure TfmPrincipal.Filmes1Click(Sender: TObject);
 begin

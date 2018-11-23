@@ -192,7 +192,7 @@ begin
 
         qrVendas.ParamByName('DATA').AsDate := Now;
         qrVendas.ParamByName('SESSAO').AsInteger := qrSessoesID.AsInteger;
-        qrVendas.ParamByName('TOTAL').AsCurrency := 0;
+        qrVendas.ParamByName('TOTAL').AsCurrency := FCadeirasSelecionadas.Count * 15;
         qrVendas.ExecSQL;
         VendaId := qrVendas.ParamByName('ID').AsInteger;
 

@@ -71,11 +71,12 @@ begin
   qrUserExists.Open;
 
   if not(qrUserExists.IsEmpty) then
-  begin
-    ShowMessage('Usuário já cadastrado.');
-    edUser.SetFocus;
-    Exit(False);
-  end;
+    if qrDadosLOGIN.AsString <> qrUserExists.FieldByName('LOGIN').AsString then
+    begin
+      ShowMessage('Usuário já cadastrado.');
+      edUser.SetFocus;
+      Exit(False);
+    end;
 
   Result := true;
 end;

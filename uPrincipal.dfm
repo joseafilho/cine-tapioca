@@ -91,5 +91,9 @@ object fmPrincipal: TfmPrincipal
         OnClick = Vendas2Click
       end
     end
+    object Configuraes1: TMenuItem
+      Caption = 'Configura'#231#245'es'
+      OnClick = Configuraes1Click
+    end
   end
 end

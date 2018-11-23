@@ -15,7 +15,8 @@ uses
   uRelatorioVendas in 'uRelatorioVendas.pas' {fmRelatorioVendas},
   uRelatorioVendasParametros in 'uRelatorioVendasParametros.pas' {fmRelatorioVendasParametros},
   uCadastroUsuarios in 'uCadastroUsuarios.pas' {fmCadastroUsuarios},
-  uDialogoLogin in 'uDialogoLogin.pas' {fmDialogoLogin};
+  uDialogoLogin in 'uDialogoLogin.pas' {fmDialogoLogin},
+  uSistemaConfiguracoes in 'uSistemaConfiguracoes.pas' {fmSistemaConfiguracoes};
 
 {$R *.res}
 
@@ -24,12 +25,25 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Cine Tapioca';
 
+  Application.CreateForm(TdmConn, dmConn);
+
+  if not(dmConn.Conecta) then
+  begin
+    fmSistemaConfiguracoes := TfmSistemaConfiguracoes.Create(nil);
+    try
+      fmSistemaConfiguracoes.FormStyle := fsNormal;
+      fmSistemaConfiguracoes.Visible := false;
+      fmSistemaConfiguracoes.ShowModal;
+    finally
+      fmSistemaConfiguracoes.Free;
+    end;
+  end;
+
   Application.CreateForm(TfmDialogoLogin, fmDialogoLogin);
 
   if fmDialogoLogin.ShowModal = mrOk then
   begin
     fmDialogoLogin.Free;
-    Application.CreateForm(TdmConn, dmConn);
     Application.CreateForm(TfmPrincipal, fmPrincipal);
     Application.Run;
   end

@@ -1,7 +1,5 @@
 inherited fmCadastroUsuarios: TfmCadastroUsuarios
   Caption = 'Cadastro de Usu'#225'rios'
-  ExplicitWidth = 740
-  ExplicitHeight = 465
   PixelsPerInch = 96
   TextHeight = 19
   inherited pcPrincipal: TPageControl
@@ -66,6 +64,7 @@ inherited fmCadastroUsuarios: TfmCadastroUsuarios
   inherited qrDados: TFDQuery
     BeforePost = qrDadosBeforePost
     AfterScroll = qrDadosAfterScroll
+    Connection = dmConn.fcConn
     SQL.Strings = (
       'SELECT * FROM USUARIOS')
     object qrDadosLOGIN: TStringField
